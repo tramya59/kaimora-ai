@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +6,6 @@
 
 <style>
 
-/* Nền toàn trang */
 body{
 margin:0;
 font-family:Arial;
@@ -15,7 +13,6 @@ background:#0f172a;
 color:white;
 }
 
-/* Thanh menu */
 header{
 display:flex;
 justify-content:space-between;
@@ -34,7 +31,6 @@ text-decoration:none;
 color:white;
 }
 
-/* Trang chủ */
 .hero{
 display:flex;
 justify-content:center;
@@ -56,19 +52,17 @@ font-size:48px;
 color:#cbd5f5;
 }
 
-/* Nút */
 .btn{
+display:inline-block;
 margin-top:20px;
 padding:14px 28px;
 background:#22c55e;
-border:none;
 border-radius:8px;
 color:white;
+text-decoration:none;
 font-size:16px;
-cursor:pointer;
 }
 
-/* Logo AI */
 .ai-avatar{
 width:220px;
 height:220px;
@@ -76,13 +70,11 @@ border-radius:50%;
 object-fit:cover;
 }
 
-/* Section chung */
 .section{
 padding:80px 40px;
 text-align:center;
 }
 
-/* Card tính năng */
 .cards{
 display:flex;
 justify-content:center;
@@ -98,7 +90,6 @@ border-radius:12px;
 width:250px;
 }
 
-/* Footer */
 footer{
 text-align:center;
 padding:30px;
@@ -107,7 +98,6 @@ color:#94a3b8;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -119,11 +109,11 @@ color:#94a3b8;
 <nav>
 <a href="#home">Trang chủ</a>
 <a href="#about">Giới thiệu</a>
-<a href="#features">Tính năng</a>
 <a href="#contact">Liên hệ</a>
 </nav>
 
 </header>
+
 
 <!-- TRANG CHỦ -->
 
@@ -135,17 +125,17 @@ color:#94a3b8;
 
 <p>
 Kaimora là trợ lý AI giúp bạn học lập trình Python
-dễ dàng từ cơ bản đến nâng cao.
+từ cơ bản đến nâng cao.
 </p>
 
-<a href="#ai">
-<button class="btn">Bắt đầu học</button>
-</a>
+<a href="#ai" class="btn">Bắt đầu học</a>
+
 </div>
 
 <img src="logoAI.jpg" class="ai-avatar">
 
 </section>
+
 
 <!-- GIỚI THIỆU -->
 
@@ -154,16 +144,16 @@ dễ dàng từ cơ bản đến nâng cao.
 <h2>Giới thiệu Kaimora AI</h2>
 
 <p>
-Kaimora là trợ lý AI hỗ trợ học sinh và sinh viên học lập trình Python 
-từ cơ bản đến nâng cao. AI có thể giải thích code, sửa lỗi và đưa ra 
-các ví dụ giúp người học hiểu nhanh hơn.
+Kaimora là trợ lý AI hỗ trợ học sinh và sinh viên học lập trình Python.
+AI có thể giải thích code, sửa lỗi và tạo bài tập thực hành.
 </p>
 
 </section>
 
+
 <!-- TÍNH NĂNG -->
 
-<section class="section" id="features">
+<section class="section">
 
 <h2>Tính năng của Kaimora</h2>
 
@@ -188,19 +178,9 @@ các ví dụ giúp người học hiểu nhanh hơn.
 
 </section>
 
-<!-- LIÊN HỆ -->
 
-<section class="section" id="contact">
+<!-- CHAT AI -->
 
-<h2>Liên hệ</h2>
-
-<p>Email: kaimora@gmail.com</p>
-<p>Facebook: Kaimora AI</p>
-<p>Phone: 0563922459 </p>
-
-</section>
-
-<!-- Khu vực chat AI -->
 <section class="section" id="ai">
 
 <h2>Chat với Kaimora AI</h2>
@@ -215,6 +195,24 @@ style="border:none;border-radius:12px;">
 </section>
 
 
+<!-- LIÊN HỆ -->
+
+<section class="section" id="contact">
+
+<h2>Liên hệ</h2>
+
+<p>Email: kaimora@gmail.com</p>
+<p>Facebook: Kaimora AI</p>
+<p>Phone: 0123 456 789</p>
+
+</section>
+
+
 <footer>
+
 <p>© 2026 Kaimora AI</p>
+
 </footer>
+
+</body>
+</html>

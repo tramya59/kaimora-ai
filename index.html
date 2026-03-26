@@ -1,10 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Kaimora AI - Học Python</title>
 
 <style>
+
+html{
+scroll-behavior:smooth;
+}
 
 body{
 margin:0;
@@ -61,6 +68,12 @@ border-radius:8px;
 color:white;
 text-decoration:none;
 font-size:16px;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#16a34a;
+transform:scale(1.05);
 }
 
 .ai-avatar{
@@ -88,6 +101,11 @@ background:#1e293b;
 padding:30px;
 border-radius:12px;
 width:250px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
 }
 
 footer{
@@ -98,9 +116,13 @@ color:#94a3b8;
 }
 
 </style>
+
 </head>
 
 <body>
+
+<!-- CHAT WIDGET -->
+
 <script id="kami-chat-widget"
 	src="https://kamimind.ai/kami-chat-widget.js"
 	token="70yqS6kJyelHNeDTEpExlIZHrye6Tq0S"
@@ -115,8 +137,10 @@ color:#94a3b8;
 	tooltipFontSize="14px"
 	width="400"
 	height="600"
-	opacityBackground="100"	defer
+	opacityBackground="100"
+	defer
 ></script>
+
 <header>
 
 <h2>KAIMORA AI</h2>
@@ -128,7 +152,6 @@ color:#94a3b8;
 </nav>
 
 </header>
-
 
 <!-- TRANG CHỦ -->
 
@@ -151,7 +174,6 @@ từ cơ bản đến nâng cao.
 
 </section>
 
-
 <!-- GIỚI THIỆU -->
 
 <section class="section" id="about">
@@ -164,7 +186,6 @@ AI có thể giải thích code, sửa lỗi và tạo bài tập thực hành.
 </p>
 
 </section>
-
 
 <!-- TÍNH NĂNG -->
 
@@ -193,23 +214,23 @@ AI có thể giải thích code, sửa lỗi và tạo bài tập thực hành.
 
 </section>
 
-
 <!-- CHAT AI -->
+
+<section id="ai" class="section">
+
+<h2>Trợ lý AI</h2>
 
 <iframe scrolling="no"
     loading="lazy"
     frameborder="0"
     id="integrate-iframe"
     allowfullscreen="true"
-    style="width: 100%; border: none; height: 100vh;" 
-src="https://kamimind.ai/v2/integrate/70yqS6kJyelHNeDTEpExlIZHrye6Tq0S/2d88444d-be13-4d9e-aa66-f53734891f16?allowCopy=true&allowMicro=true"
+    style="width: 100%; border: none; height: 600px;" 
+    src="https://kamimind.ai/v2/integrate/70yqS6kJyelHNeDTEpExlIZHrye6Tq0S/2d88444d-be13-4d9e-aa66-f53734891f16?allowCopy=true&allowMicro=true"
     allow="clipboard-read; clipboard-write; autoplay; encrypted-media; fullscreen; display-capture; microphone"
 ></iframe>
 
-
-
-
-
+</section>
 
 <!-- LIÊN HỆ -->
 

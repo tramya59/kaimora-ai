@@ -1,226 +1,936 @@
 <!DOCTYPE html>
-
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Học Viện</title>
 
-<title>Kaimora AI - Học Python</title>
+<!-- =====================================================
+     FONT: Be Vietnam Pro — thay thế Space Mono, Syne, Inter
+     Các weight dùng: 300 (nhẹ), 400 (thường), 500 (vừa),
+     600 (đậm vừa), 700 (đậm), 800 (rất đậm), 900 (cực đậm)
+     Nếu muốn đổi font khác, thay URL dưới đây
+===================================================== -->
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 
 <style>
-
-html{
-scroll-behavior:smooth;
+  /* Giúp thẻ link bao bọc đẹp mắt và không đổi màu chữ */
+.card-link {
+  text-decoration: none; /* Bỏ gạch chân */
+  color: inherit;        /* Lấy màu chữ gốc của thẻ */
+  display: block;        /* Để click được toàn bộ vùng của thẻ */
+  transition: transform 0.2s; /* Thêm hiệu ứng cho mượt */
 }
 
-body{
-margin:0;
-font-family:Arial;
-background:#0f172a;
-color:white;
+/* Hiệu ứng nhẹ khi rê chuột vào (tùy chọn) */
+.card-link:hover {
+  transform: translateY(-5px); /* Thẻ bay lên nhẹ một chút */
 }
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2236;
+    --accent: #3b82f6;
+    --accent2: #fbbf24;
+    --accent3: #10b981;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --python-blue: #306998;
+    --python-yellow: #FFD43B;
+    --border: rgba(59,130,246,0.15);
+    --glow: 0 0 30px rgba(59,130,246,0.2);
 
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 60px;
-background:#020617;
-}
+    /* =====================================================
+       FONT VARIABLES — chỉnh tại đây nếu muốn đổi font
+       --font-main   : dùng cho body, đoạn văn, nút bấm
+       --font-display: dùng cho tiêu đề lớn, logo
+       --font-mono   : dùng cho code, số, badge kỹ thuật
+    ===================================================== */
+    --font-main:    'Be Vietnam Pro', sans-serif;
+    --font-display: 'Be Vietnam Pro', sans-serif;
+    --font-mono:    'Be Vietnam Pro', monospace;
+  }
 
-header h2{
-color:#38bdf8;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-nav a{
-margin-left:20px;
-text-decoration:none;
-color:white;
-}
+  body {
+    font-family: var(--font-main);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* Be Vietnam Pro có letter-spacing tự nhiên đẹp hơn Inter */
+    letter-spacing: 0.01em;
+  }
 
-.hero{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:60px;
-padding:100px 40px;
-flex-wrap:wrap;
-}
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-.hero-text{
-max-width:500px;
-}
+  /* =====================================================
+     NAVIGATION
+  ===================================================== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,14,26,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
 
-.hero h1{
-font-size:48px;
-}
+  /* --- Logo + tên thương hiệu ---
+     Đổi chữ "KAIMORA" bên dưới trong thẻ <div class="logo-text">
+     Đổi ảnh logo: thay src="logoAI.jpg" thành đường dẫn ảnh mới */
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--text);
+  }
 
-.hero p{
-color:#cbd5f5;
-}
+  .nav-links {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+    font-family: var(--font-main);
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--text);
+    background: var(--surface2);
+  }
+  .nav-links a.active {
+    color: var(--accent);
+    border: 1px solid var(--border);
+  }
 
-.btn{
-display:inline-block;
-margin-top:20px;
-padding:14px 28px;
-background:#22c55e;
-border-radius:8px;
-color:white;
-text-decoration:none;
-font-size:16px;
-transition:0.3s;
-}
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
 
-.btn:hover{
-background:#16a34a;
-transform:scale(1.05);
-}
+  /* =====================================================
+     HERO — TRANG CHỦ
+  ===================================================== */
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-.ai-avatar{
-width:220px;
-height:220px;
-border-radius:50%;
-object-fit:cover;
-}
+  /* Badge nhỏ phía trên tiêu đề */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.3);
+    color: var(--accent);
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease forwards;
+    letter-spacing: 0.05em;
+  }
 
-.section{
-padding:80px 40px;
-text-align:center;
-}
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--python-blue), var(--accent), var(--python-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-desc {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    font-weight: 400;
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
 
-.cards{
-display:flex;
-justify-content:center;
-gap:30px;
-flex-wrap:wrap;
-margin-top:40px;
-}
+  /* Nút chính — màu xanh accent */
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 0.75rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-family: var(--font-main);
+  }
+  .btn-primary:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59,130,246,0.35); }
 
-.card{
-background:#1e293b;
-padding:30px;
-border-radius:12px;
-width:250px;
-transition:0.3s;
-}
+  /* Nút viền */
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    padding: 0.75rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-family: var(--font-main);
+  }
+  .btn-outline:hover { background: var(--surface2); border-color: var(--accent); }
 
-.card:hover{
-transform:translateY(-10px);
-}
+  /* =====================================================
+     CODE SNIPPET — khối code minh họa trên Hero
+  ===================================================== */
+  .hero-code {
+    margin-top: 3.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 700px;
+    box-shadow: var(--glow);
+    animation: fadeUp 0.6s ease 0.4s both;
+  }
+  .code-header {
+    background: var(--surface2);
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.red { background: #ff5f57; }
+  .dot.yellow { background: #ffbd2e; }
+  .dot.green { background: #28ca41; }
+  .code-filename { margin-left: auto; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; }
+  .code-body {
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.85;
+    font-weight: 400;
+  }
+  .code-body .kw { color: #f472b6; font-weight: 600; }
+  .code-body .fn { color: #60a5fa; }
+  .code-body .str { color: #a3e635; }
+  .code-body .num { color: #fb923c; }
+  .code-body .cmt { color: #64748b; font-style: italic; }
+  .code-body .cls { color: var(--python-yellow); font-weight: 600; }
 
-footer{
-text-align:center;
-padding:30px;
-background:#020617;
-color:#94a3b8;
-}
+  /* =====================================================
+     STATS — 4 ô số liệu
+  ===================================================== */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.6s ease 0.5s both;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .stat-label { color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem; font-weight: 400; line-height: 1.4; }
 
+  /* =====================================================
+     SECTION — dùng chung cho mọi section
+  ===================================================== */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .section-sub { color: var(--text-muted); margin-bottom: 2rem; font-weight: 400; }
+
+  /* =====================================================
+     FEATURES GRID — 6 thẻ tính năng Python
+  ===================================================== */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .feature-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: var(--glow);
+  }
+  .feature-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .feature-card h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  .feature-card p { color: var(--text-muted); font-size: 0.875rem; line-height: 1.65; font-weight: 400; }
+
+  /* =====================================================
+     TIMELINE — lịch sử Python
+  ===================================================== */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--python-yellow), var(--accent3));
+    border-radius: 2px;
+  }
+  .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 1.5rem; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 0.4rem;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 8px var(--accent);
+  }
+  .timeline-year {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.08em;
+  }
+  .timeline-item h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+  }
+  .timeline-item p { color: var(--text-muted); font-size: 0.875rem; line-height: 1.65; }
+
+  /* =====================================================
+     THƯ VIỆN — thanh tìm kiếm & bộ lọc
+  ===================================================== */
+  .search-bar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .search-input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-family: var(--font-main);
+    font-weight: 400;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--text-muted); }
+
+  .filter-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .filter-tab {
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-main);
+  }
+  .filter-tab:hover, .filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  /* =====================================================
+     BOOKS GRID — lưới thẻ sách
+  ===================================================== */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  .book-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), var(--glow);
+    border-color: var(--accent);
+  }
+  .book-cover {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .book-cover::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40px;
+    background: linear-gradient(to top, var(--surface), transparent);
+  }
+  .book-info { padding: 1rem; }
+  .book-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-main);
+    letter-spacing: 0.03em;
+  }
+  .book-info h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+  .book-info .book-author { color: var(--text-muted); font-size: 0.78rem; font-weight: 400; }
+  .book-rating { margin-top: 0.5rem; color: var(--python-yellow); font-size: 0.8rem; }
+
+  /* Nút "Xem / Tải sách" trong mỗi thẻ sách
+     → Link tương ứng được khai báo trong mảng `books` ở JS bên dưới */
+  .book-btn {
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-main);
+  }
+  .book-btn:hover { background: rgba(59,130,246,0.1); border-color: var(--accent); }
+
+  /* =====================================================
+     AI PAGE — trang "Học với AI"
+  ===================================================== */
+  .ai-hero {
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .ai-orb {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #60a5fa, #3b82f6, #1d4ed8, #0f172a);
+    margin: 0 auto 2rem;
+    box-shadow: 0 0 60px rgba(59,130,246,0.5), 0 0 120px rgba(59,130,246,0.2);
+    animation: pulse 3s ease-in-out infinite;
+    position: relative;
+  }
+  .ai-orb::after {
+    content: 'AI';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.05em;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 60px rgba(59,130,246,0.5), 0 0 120px rgba(59,130,246,0.2); }
+    50% { box-shadow: 0 0 80px rgba(59,130,246,0.7), 0 0 160px rgba(59,130,246,0.35); }
+  }
+
+  .ai-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .ai-feat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .ai-feat-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+  .ai-feat h4 { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.35rem; }
+  .ai-feat p { color: var(--text-muted); font-size: 0.8rem; font-weight: 400; line-height: 1.55; }
+
+  /* =====================================================
+     NÚT CTA — "Bắt Đầu Học Với KamiMind"
+     → Link: href="https://kamimind.app" trong thẻ <a> bên dưới
+     Đổi link bằng cách thay https://kamimind.app
+  ===================================================== */
+  
+  .ai-cta {
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-ai {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(139,92,246,0.4);
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+  }
+  .btn-ai:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(139,92,246,0.6);
+  }
+  .btn-ai-pulse {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* =====================================================
+     TESTIMONIALS — 3 đánh giá người dùng
+  ===================================================== */
+  .testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 2rem 4rem;
+    position: relative;
+    z-index: 1;
+  }
+  .testimonial {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+  .testimonial p { color: var(--text-muted); font-size: 0.875rem; line-height: 1.65; font-style: italic; margin-bottom: 1rem; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .author-info .name { font-weight: 700; font-size: 0.85rem; }
+  .author-info .role { color: var(--text-muted); font-size: 0.75rem; font-weight: 400; }
+
+  /* =====================================================
+     FOOTER
+  ===================================================== */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-family: var(--font-main);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  footer span { color: var(--accent); font-weight: 700; }
+
+  /* Divider ngang */
+  .divider { height: 1px; background: var(--border); max-width: 1200px; margin: 0 auto; }
+
+  /* =====================================================
+     PAGE HEADER — tiêu đề đầu trang Thư viện
+  ===================================================== */
+  .page-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .page-header-inner { max-width: 1200px; margin: 0 auto; }
+  .page-header h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.01em;
+  }
+  .page-header p { color: var(--text-muted); font-weight: 400; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    .nav-links li:not(:last-child):not(:first-child) { display: none; }
+    .hero h1 { font-size: 2rem; }
+  }
 </style>
-
 </head>
-
 <body>
 
-<!-- CHAT WIDGET -->
-
-<script id="kami-chat-widget"
-	src="https://kamimind.ai/kami-chat-widget.js"
-	token="70yqS6kJyelHNeDTEpExlIZHrye6Tq0S"
-	charset="utf-8"
-	botToken="2d88444d-be13-4d9e-aa66-f53734891f16"
-	bottomOffset="0px"
-	bubbleSize="50"
-	autoChatPopup="false"
-	chatPopupDelay="5"
-	tooltipText="KamiMind Agent"
-	tooltipBgColor="#222"
-	tooltipFontSize="14px"
-	width="400"
-	height="600"
-	opacityBackground="100"
-	defer
-></script>
-
-<header>
-
-<h2>KAIMORA AI</h2>
-
+<!-- =====================================================
+     NAVIGATION BAR
+     - Logo: đổi ảnh tại src="logoAI.jpg"
+     - Tên thương hiệu: đổi chữ "KAIMORA" bên dưới
+     - Các tab: 🏠 Trang Chủ | 📚 Thư Viện | 🤖 Học Với AI
+===================================================== -->
 <nav>
-<a href="#home">Trang chủ</a>
-<a href="#about">Giới thiệu</a>
-<a href="#contact">Liên hệ</a>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" onclick="showPage('home')">
+      <!-- ▼▼▼ LOGO ẢNH: thay "logoAI.jpg" bằng URL hoặc đường dẫn ảnh mới ▼▼▼ -->
+      <img src="logoAI.jpg" alt="Logo Kaimora"
+           style="height: 50px; width: 50px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent);">
+      <!-- ▼▼▼ TÊN THƯƠNG HIỆU: đổi chữ KAIMORA ▼▼▼ -->
+      <div class="logo-text">KAIMORA</div>
+    </a>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" class="active" id="nav-home">🏠 Trang Chủ</a></li>
+      <li><a onclick="showPage('library')" id="nav-library">📚 Thư Viện</a></li>
+      <li><a onclick="showPage('ai')" id="nav-ai">🤖 Học Với AI</a></li>
+    </ul>
+  </div>
 </nav>
 
-</header>
+<!-- =====================================================
+     TRANG CHỦ (page-home)
+===================================================== -->
+<div id="page-home" class="page active">
 
-<!-- TRANG CHỦ -->
+  <div class="hero">
+    <!-- Badge nhỏ trên tiêu đề — đổi chữ tại đây -->
+    <div class="hero-badge">🐍 Ngôn ngữ lập trình #1 thế giới</div>
 
-<section class="hero" id="home">
+    <!-- Tiêu đề chính — chữ trong thẻ <span> sẽ có màu gradient -->
+    <h1>Học <span>Python</span><br>Từ Cơ Bản<br>Đến Chuyên Sâu</h1>
 
-<div class="hero-text">
+    <!-- Mô tả ngắn dưới tiêu đề -->
+    <p class="hero-desc">Python — ngôn ngữ đơn giản, mạnh mẽ và đa năng. Từ khoa học dữ liệu, AI đến web development, Python là chìa khóa mở cánh cửa công nghệ.</p>
 
-<h1>Học Python cùng Kaimora AI</h1>
+    <div class="hero-btns">
+      <!-- Nút 1: dẫn sang trang Thư Viện -->
+      <button class="btn-primary" onclick="showPage('library')">📚 Khám phá tư liệu</button>
+      <!-- Nút 2: dẫn sang trang Học với AI -->
+      <button class="btn-outline" onclick="showPage('ai')">🤖 Học với AI ngay</button>
+    </div>
 
-<p>
-Kaimora là trợ lý AI giúp bạn học lập trình Python
-từ cơ bản đến nâng cao.
-</p>
+    <!-- Khối code minh họa — chỉnh nội dung code bên trong .code-body -->
+    <div class="hero-code">
+      <div class="code-header">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <!-- Tên file hiển thị góc phải thanh tiêu đề code -->
+        <div class="code-filename">hello_python.py</div>
+      </div>
+      <div class="code-body">
+        <div><span class="cmt"># Chào mừng đến với Python! 🐍</span></div>
+        <div><span class="kw">def</span> <span class="fn">chao_python</span>(ten):</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="str">f"Xin chào, {ten}! Hãy bắt đầu học Python hôm nay!"</span></div>
+        <br>
+        <div><span class="cls">danh_sach</span> = [<span class="str">"Data Science"</span>, <span class="str">"AI"</span>, <span class="str">"Web Dev"</span>]</div>
+        <div><span class="kw">for</span> ky_nang <span class="kw">in</span> danh_sach:</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="str">f"Python giúp bạn làm chủ: {ky_nang}"</span>)</div>
+        <br>
+        <div><span class="fn">chao_python</span>(<span class="str">"Học Viên"</span>) <span class="cmt"># → Xin chào!</span></div>
+      </div>
+    </div>
+  </div>
 
-<a href="#ai" class="btn">Bắt đầu học</a>
+  <!-- 4 ô số liệu thống kê -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">1st</div>
+      <div class="stat-label">Ngôn ngữ phổ biến nhất TIOBE 2024</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">30+</div>
+      <div class="stat-label">Năm lịch sử phát triển</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">500K+</div>
+      <div class="stat-label">Thư viện & packages trên PyPI</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">8M+</div>
+      <div class="stat-label">Lập trình viên Python toàn cầu</div>
+    </div>
+  </div>
 
+  <div class="divider"></div>
+
+  <div class="features-grid">
+  <a href="https://pytorch.org/" target="_blank" class="card-link">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(59,130,246,0.1)">🤖</div>
+      <h3>Trí Tuệ Nhân Tạo & ML</h3>
+      <p>TensorFlow, PyTorch, scikit-learn — Python là ngôn ngữ thống trị trong AI và Machine Learning toàn cầu.</p>
+    </div>
+  </a>
+
+  <a href="https://pandas.pydata.org/" target="_blank" class="card-link">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(16,185,129,0.1)">📊</div>
+      <h3>Khoa Học Dữ Liệu</h3>
+      <p>Pandas, NumPy, Matplotlib giúp phân tích, trực quan hóa dữ liệu một cách nhanh chóng và hiệu quả.</p>
+    </div>
+  </a>
+
+  <a href="https://www.djangoproject.com/" target="_blank" class="card-link">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(251,191,36,0.1)">🌐</div>
+      <h3>Phát Triển Web</h3>
+      <p>Django và Flask là 2 framework mạnh mẽ giúp xây dựng ứng dụng web từ đơn giản đến phức tạp.</p>
+    </div>
+  </a>
+
+  <a href="https://docs.python.org/3/library/os.html" target="_blank" class="card-link">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(239,68,68,0.1)">⚙️</div>
+      <h3>Tự Động Hóa</h3>
+      <p>Tự động hóa các tác vụ lặp đi lặp lại, viết script xử lý file, email và tương tác với hệ thống.</p>
+    </div>
+  </a>
+
+  <a href="https://www.python.org/blogs/tags/security/" target="_blank" class="card-link">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(139,92,246,0.1)">🔒</div>
+      <h3>An Ninh Mạng</h3>
+      <p>Python được dùng rộng rãi trong kiểm tra bảo mật, pen-testing và phân tích mã độc.</p>
+    </div>
+  </a>
+
+  <a href="https://www.pygame.org/" target="_blank" class="card-link">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(244,114,182,0.1)">🎮</div>
+      <h3>Lập Trình Game</h3>
+      <p>Pygame và các thư viện khác cho phép tạo ra các trò chơi 2D thú vị và hấp dẫn.</p>
+    </div>
+  </a>
 </div>
 
-<img src="logoAI.jpg" class="ai-avatar">
+  <!-- Timeline lịch sử Python -->
+  <div class="section">
+    <p class="section-title">Lịch Sử Python</p>
+    <p class="section-sub">Hành trình từ sở thích cá nhân đến ngôn ngữ số 1 thế giới</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">1989</div>
+        <h4>Guido van Rossum bắt đầu phát triển</h4>
+        <p>Tại Trung tâm Toán học và Tin học Hà Lan (CWI), Guido bắt đầu viết Python như một dự án cá nhân trong kỳ nghỉ Giáng Sinh.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1991</div>
+        <h4>Python 0.9.0 ra mắt</h4>
+        <p>Phiên bản đầu tiên được công bố, đã có các tính năng cốt lõi như class, exception handling và functions.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2000</div>
+        <h4>Python 2.0</h4>
+        <p>Hỗ trợ Unicode, garbage collection và list comprehensions. Python bắt đầu được cộng đồng quốc tế đón nhận rộng rãi.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2008</div>
+        <h4>Python 3.0 — Bước đột phá</h4>
+        <p>Phiên bản tái thiết kế hoàn toàn với cú pháp rõ ràng hơn, không tương thích ngược với Python 2.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2020+</div>
+        <h4>Python thống trị kỷ nguyên AI</h4>
+        <p>Với sự bùng nổ của AI và Data Science, Python trở thành ngôn ngữ không thể thiếu, đứng đầu mọi bảng xếp hạng lập trình.</p>
+      </div>
+    </div>
+  </div>
 
-</section>
+</div><!-- END page-home -->
 
-<!-- GIỚI THIỆU -->
+<!-- =====================================================
+     TRANG THƯ VIỆN (page-library)
+===================================================== -->
+<div id="page-library" class="page">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h2>📚 Thư Viện Tư Liệu Python</h2>
+      <p>Bộ sưu tập sách và tài liệu học Python từ cơ bản đến nâng cao</p>
+    </div>
+  </div>
 
-<section class="section" id="about">
+  <div class="section">
+    <!-- Ô tìm kiếm -->
+    <div class="search-bar">
+      <input class="search-input" type="text"
+             placeholder="🔍 Tìm kiếm sách, tác giả..."
+             id="searchInput" oninput="filterBooks()">
+    </div>
 
-<h2>Giới thiệu Kaimora AI</h2>
+    <!-- Bộ lọc theo danh mục -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="setFilter('all', this)">Tất cả</button>
+      <button class="filter-tab" onclick="setFilter('beginner', this)">Cơ bản</button>
+      <button class="filter-tab" onclick="setFilter('intermediate', this)">Trung cấp</button>
+      <button class="filter-tab" onclick="setFilter('advanced', this)">Nâng cao</button>
+      <button class="filter-tab" onclick="setFilter('data', this)">Data Science</button>
+      <button class="filter-tab" onclick="setFilter('ai', this)">AI/ML</button>
+      <button class="filter-tab" onclick="setFilter('web', this)">Web Dev</button>
+    </div>
 
-<p>
-Kaimora là trợ lý AI hỗ trợ học sinh và sinh viên học lập trình Python.
-AI có thể giải thích code, sửa lỗi và tạo bài tập thực hành.
-</p>
+    <!-- Lưới sách — tự động render bởi JS bên dưới
+         ▼▼▼ ĐỂ THÊM LINK SÁCH: chỉnh trường "link" trong mảng books ▼▼▼ -->
+    <div class="books-grid" id="booksGrid"></div>
+  </div>
+</div><!-- END page-library -->
 
-</section>
+<!-- =====================================================
+     TRANG HỌC VỚI AI (page-ai)
+===================================================== -->
+<div id="page-ai" class="page">
 
-<!-- TÍNH NĂNG -->
+  <!-- Phần giới thiệu AI -->
+  <div class="ai-hero">
+    <!-- Quả cầu AI có animation -->
+    <div class="kaimora"></div>
 
-<section class="section">
+    <h2 style="font-family:var(--font-display);font-size:2.25rem;font-weight:800;margin-bottom:1rem;letter-spacing:-0.02em">
+      Học Python Cùng<br>Trợ Lý AI Thông Minh
+    </h2>
+    <p style="color:var(--text-muted);line-height:1.75;font-size:1rem;font-weight:400">
+      Đặt câu hỏi, giải bài tập, debug code và khám phá Python theo cách của riêng bạn — với sự hỗ trợ 24/7 từ trợ lý AI KamiMind.
+    </p>
+  </div>
 
-<h2>Tính năng của Kaimora</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Giải thích Python</h3>
-<p>AI giải thích code Python dễ hiểu.</p>
-</div>
-
-<div class="card">
-<h3>Sửa lỗi Code</h3>
-<p>Kaimora giúp tìm lỗi trong code Python.</p>
-</div>
-
-<div class="card">
-<h3>Tạo bài tập</h3>
-<p>AI tạo bài tập Python để luyện tập.</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- CHAT AI -->
-
-<section id="ai" class="section">
-
-<h2>Trợ lý AI</h2>
-
-<iframe scrolling="no"
+  <!-- 6 tính năng AI -->
+  
+  <!-- ▼▼▼ NÚT CTA CHÍNH: thay href="https://kamimind.app" bằng link thật của bạn ▼▼▼ -->
+  <div class="ai-cta">
+    <iframe scrolling="no"
     loading="lazy"
     frameborder="0"
     id="integrate-iframe"
@@ -232,23 +942,236 @@ AI có thể giải thích code, sửa lỗi và tạo bài tập thực hành.
 
 </section>
 
-<!-- LIÊN HỆ -->
+    <!-- Dòng chú thích dưới nút CTA — đổi nội dung tự do -->
+    <p style="color:var(--text-muted);font-size:0.8rem;margin-top:1rem;font-weight:400">
+      Miễn phí • Không cần đăng ký • Học ngay bây giờ
+    </p>
+  </div>
 
-<section class="section" id="contact">
+  <!-- 3 đánh giá người dùng — đổi tên, chức danh, nội dung tại đây -->
+  <div class="testimonials">
+    <div class="testimonial">
+      <p>"Nhờ KamiMind, tôi học Python chỉ trong 2 tháng và đã làm được dự án data analysis đầu tiên. AI giải thích rất dễ hiểu!"</p>
+      <div class="testimonial-author">
+        <div class="avatar" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)">👩</div>
+        <div class="author-info">
+          <div class="name">Nguyễn Minh Anh</div>
+          <div class="role">Sinh viên CNTT</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>"Tôi hay bị stuck khi debug. Giờ chỉ cần paste code vào KamiMind, AI chỉ ra lỗi và giải thích tại sao ngay lập tức!"</p>
+      <div class="testimonial-author">
+        <div class="avatar" style="background:linear-gradient(135deg,#10b981,#059669)">👨</div>
+        <div class="author-info">
+          <div class="name">Trần Văn Hùng</div>
+          <div class="role">Junior Developer</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>"Học cùng AI khác hẳn xem video hay đọc sách. Tôi hỏi được bất cứ câu gì mà không sợ bị phán xét!"</p>
+      <div class="testimonial-author">
+        <div class="avatar" style="background:linear-gradient(135deg,#fbbf24,#f59e0b)">👩</div>
+        <div class="author-info">
+          <div class="name">Lê Thu Hương</div>
+          <div class="role">Marketing chuyển ngành</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<h2>Liên hệ</h2>
+</div><!-- END page-ai -->
 
-<p>Email: kaimora@gmail.com</p>
-<p>Facebook: Kaimora AI</p>
-<p>Phone: 0123 456 789</p>
-
-</section>
-
+<!-- =====================================================
+     FOOTER — đổi tên thương hiệu nếu cần
+===================================================== -->
 <footer>
-
-<p>© 2026 Kaimora AI</p>
-
+  <p>Made with <span>♥</span> by Python Học Viện &nbsp;|&nbsp; Powered by <span>KamiMind AI</span></p>
+  <p style="margin-top:0.5rem">© 2024 Python Học Viện — Nền tảng học Python hàng đầu Việt Nam</p>
 </footer>
 
+<script>
+/*
+  =====================================================
+  DANH SÁCH SÁCH — chỉnh link "link" để dẫn tới trang đúng
+  Mỗi object gồm:
+    title     : tên sách
+    author    : tác giả
+    emoji     : biểu tượng hiển thị trên bìa
+    color     : màu nền bìa sách (hex)
+    tag       : nhãn danh mục hiển thị (ví dụ: "Cơ bản")
+    tagColor  : màu nhãn
+    cat       : danh mục lọc — phải khớp với filter-tab:
+                'beginner' | 'intermediate' | 'advanced' | 'data' | 'ai' | 'web'
+    rating    : chuỗi sao ★★★★★
+    desc      : mô tả ngắn
+    link      : ▼▼▼ ĐÂY LÀ LINK NÚT "Xem / Tải sách" — thay "#" bằng URL thật ▼▼▼
+  =====================================================
+*/
+const books = [
+  {
+    title: "Lập Trình Python Cấp Tốc",
+    author: "Đội ngũ giảng viên Khoa CNTT - Trường Đại học Sư phạm Kỹ thuật Hưng Yên (UTEHY).",
+    emoji: "🐍",
+    color: "#1a3a5c",
+    tag: "Cơ bản",
+    tagColor: "#3b82f6",
+    cat: "beginner",
+    rating: "★★★★★",
+    desc: "Sách nhập môn Python được đánh giá cao nhất, phù hợp tuyệt đối với người mới bắt đầu.",
+    link: "https://c3lequydon.daklak.edu.vn/wp-content/uploads/2022/12/PythonCoban_UTEHY.pdf" // ← thay link thật tại đây
+  },
+  {
+    title: "Tự Động Hóa Mọi Thứ Với Python",
+    author: "Al Sweigart",
+    emoji: "⚙️",
+    color: "#1a3a2c",
+    tag: "Cơ bản",
+    tagColor: "#10b981",
+    cat: "beginner",
+    rating: "★★★★★",
+    desc: "Học Python qua các ví dụ tự động hóa thực tế — miễn phí đọc online.",
+    link: "https://automatetheboringstuff.com/" // ← thay link thật tại đây
+  },
+  {
+    title: "Lập Trình Python Thành Thạo",
+    author: "Wes McKinney",
+    emoji: "🔥",
+    color: "#3a1a1a",
+    tag: "Nâng cao",
+    tagColor: "#ef4444",
+    cat: "advanced",
+    rating: "★★★★★",
+    desc: "Cuốn sách giúp bạn viết code Python theo phong cách Pythonic thực sự.",
+    link: "https://wesmckinney.com/book/" // ← thay link thật tại đây
+  },
+  {
+    title: "Phân Tích Dữ Liệu Với Python",
+    author: "Đội ngũ biên tập Gitiho (đây là bài blog tổng hợp kiến thức).",
+    emoji: "📊",
+    color: "#1a2a3a",
+    tag: "Data Science",
+    tagColor: "#8b5cf6",
+    cat: "data",
+    rating: "★★★★☆",
+    desc: "Pandas và NumPy từ người tạo ra Pandas. Tài liệu chuẩn cho data analyst.",
+    link: "https://gitiho.com/blog/huong-dan-tu-hoc-data-analyst-cho-nguoi-moi.html?utm_source=GA&utm_campaign=Tuhocdata&utm_medium=GA_Tuhocdata_Canx_Search&gad_source=1&gad_campaignid=20867791918&gbraid=0AAAAADD_6NvPUMEEW96P8To0eZMQYRvpB&gclid=Cj0KCQjwkMjOBhC5ARIsADIdb3fkRLSJjSPz0CWk-lhfbBSaXCdr1pYHEV9Fsu-DWVThIMwFmMtGSs4aAmRyEALw_wcB" // ← thay link thật tại đây
+  },
+  {
+    title: "Thực Hành Máy Học (Machine Learning)",
+    author: "Aurélien Géron",
+    emoji: "🤖",
+    color: "#1a3a1a",
+    tag: "AI/ML",
+    tagColor: "#fbbf24",
+    cat: "ai",
+    rating: "★★★★★",
+    desc: "Sách machine learning thực hành với Python — từ cơ bản đến deep learning.",
+    link: "https://github.com/ageron/handson-ml3" // ← thay link thật tại đây
+  },
+  {
+    title: "Lập Trình Web Với Django Cho Người Mới",
+    author: "Nguồn từ cộng đồng Devwork.vn (tài liệu tổng hợp).t",
+    emoji: "🌐",
+    color: "#2a1a3a",
+    tag: "Web Dev",
+    tagColor: "#f472b6",
+    cat: "web",
+    rating: "★★★★☆",
+    desc: "Xây dựng ứng dụng web thực tế với Django framework theo từng bước.",
+    link: "https://devwork.vn/tai-lieu-mien-phi/189/tai-lieu-huong-dan-lap-trinh-django-danh-cho-lap-trinh-vien" // ← thay link thật tại đây
+  },
+  {
+    title: "Học Sâu Về Python",
+    author: "Đội ngũ quản trị nội dung của trang Viettuts.vn.",
+    emoji: "📖",
+    color: "#3a2a1a",
+    tag: "Cơ bản",
+    tagColor: "#3b82f6",
+    cat: "beginner",
+    rating: "★★★★☆",
+    desc: "Hơn 1500 trang kiến thức toàn diện về Python — bộ sách đầy đủ nhất.",
+    link: "https://viettuts.vn/bai-tap-python/bai-tap-quan-ly-sinh-vien-trong-python#google_vignette" // ← thay link thật tại đây
+  },
+  {
+    title: "Học Sâu (Deep Learning) Với Python",
+    author: "François Chollet (tác giả chính của Keras) và đội ngũ phát triển Keras/Google.",
+    emoji: "🧠",
+    color: "#1a1a3a",
+    tag: "AI/ML",
+    tagColor: "#fbbf24",
+    cat: "ai",
+    rating: "★★★★☆",
+    desc: "Neural networks và Deep Learning với Python, TensorFlow và PyTorch.",
+    link: "https://keras.io/getting_started/" // ← thay link thật tại đây
+  },
+  {
+    title: "Tối Ưu Hóa Python",
+    author: "Chirag Samal",
+    emoji: "💡",
+    color: "#1a3a3a",
+    tag: "Trung cấp",
+    tagColor: "#06b6d4",
+    cat: "intermediate",
+    rating: "★★★★★",
+    desc: "90 cách cụ thể để viết Python tốt hơn — dành cho lập trình viên muốn nâng cấp.",
+    link: "https://www.datacamp.com/tutorial/optimization-in-python" // ← thay link thật tại đây
+  },
+];
+
+/* =====================================================
+   RENDER SÁCH — không cần chỉnh hàm này
+===================================================== */
+let currentFilter = 'all';
+
+function renderBooks(data) {
+  const grid = document.getElementById('booksGrid');
+  grid.innerHTML = data.map(b => `
+    <div class="book-card">
+      <div class="book-cover" style="background:${b.color}">${b.emoji}</div>
+      <div class="book-info">
+        <span class="book-tag" style="background:${b.tagColor}22;color:${b.tagColor};border:1px solid ${b.tagColor}44">${b.tag}</span>
+        <h4>${b.title}</h4>
+        <div class="book-author">${b.author}</div>
+        <div class="book-rating">${b.rating}</div>
+        <p style="color:var(--text-muted);font-size:0.78rem;margin-top:0.5rem;line-height:1.55">${b.desc}</p>
+        <button class="book-btn" onclick="window.open('${b.link || '#'}','_blank')">📖 Xem / Tải sách</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setFilter(cat, el) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  filterBooks();
+}
+
+function filterBooks() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = books.filter(b => {
+    const matchCat = currentFilter === 'all' || b.cat === currentFilter;
+    const matchQ = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+  renderBooks(filtered);
+}
+
+renderBooks(books);
+
+/* =====================================================
+   CHUYỂN TRANG — không cần chỉnh hàm này
+===================================================== */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
 </body>
 </html>

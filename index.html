@@ -1014,7 +1014,7 @@ const books = [
   {
     title: "Lập Trình Python Cấp Tốc",
     author: "Đội ngũ giảng viên Khoa CNTT - Trường Đại học Sư phạm Kỹ thuật Hưng Yên (UTEHY).",
-    emoji: "🐍",
+    img: "ltcoban.jpg",
     color: "#1a3a5c",
     tag: "Cơ bản",
     tagColor: "#3b82f6",
@@ -1026,7 +1026,7 @@ const books = [
   {
     title: "Tự Động Hóa Mọi Thứ Với Python",
     author: "Al Sweigart",
-    emoji: "⚙️",
+    img: "tudochoa.png",
     color: "#1a3a2c",
     tag: "Cơ bản",
     tagColor: "#10b981",
@@ -1038,7 +1038,7 @@ const books = [
   {
     title: "Lập Trình Python Thành Thạo",
     author: "Wes McKinney",
-    emoji: "🔥",
+    img: "laptrinhtt.jpg",
     color: "#3a1a1a",
     tag: "Nâng cao",
     tagColor: "#ef4444",
@@ -1050,7 +1050,7 @@ const books = [
   {
     title: "Phân Tích Dữ Liệu Với Python",
     author: "Đội ngũ biên tập Gitiho (đây là bài blog tổng hợp kiến thức).",
-    emoji: "📊",
+    img: "nagcao.jpg",
     color: "#1a2a3a",
     tag: "Data Science",
     tagColor: "#8b5cf6",
@@ -1062,7 +1062,7 @@ const books = [
   {
     title: "Thực Hành Máy Học (Machine Learning)",
     author: "Aurélien Géron",
-    emoji: "🤖",
+    img: "thuchanh.jpg",
     color: "#1a3a1a",
     tag: "AI/ML",
     tagColor: "#fbbf24",
@@ -1074,7 +1074,7 @@ const books = [
   {
     title: "Lập Trình Web Với Django Cho Người Mới",
     author: "Nguồn từ cộng đồng Devwork.vn (tài liệu tổng hợp).t",
-    emoji: "🌐",
+    img: "django.png",
     color: "#2a1a3a",
     tag: "Web Dev",
     tagColor: "#f472b6",
@@ -1086,7 +1086,7 @@ const books = [
   {
     title: "Học Sâu Về Python",
     author: "Đội ngũ quản trị nội dung của trang Viettuts.vn.",
-    emoji: "📖",
+    img: "hócau.jpg",
     color: "#3a2a1a",
     tag: "Cơ bản",
     tagColor: "#3b82f6",
@@ -1098,7 +1098,7 @@ const books = [
   {
     title: "Học Sâu (Deep Learning) Với Python",
     author: "François Chollet (tác giả chính của Keras) và đội ngũ phát triển Keras/Google.",
-    emoji: "🧠",
+    img: "hocsau.jpg",
     color: "#1a1a3a",
     tag: "AI/ML",
     tagColor: "#fbbf24",
@@ -1110,7 +1110,7 @@ const books = [
   {
     title: "Tối Ưu Hóa Python",
     author: "Chirag Samal",
-    emoji: "💡",
+    img: "toiuu.jpg",
     color: "#1a3a3a",
     tag: "Trung cấp",
     tagColor: "#06b6d4",
@@ -1130,7 +1130,10 @@ function renderBooks(data) {
   const grid = document.getElementById('booksGrid');
   grid.innerHTML = data.map(b => `
     <div class="book-card">
-      <div class="book-cover" style="background:${b.color}">${b.emoji}</div>
+      <div class="book-cover" style="background:${b.color}; padding:0; overflow:hidden;">
+  <img src="${b.img}" alt="${b.title}"
+       style="width:100%; height:100%; object-fit:cover; display:block;">
+</div>
       <div class="book-info">
         <span class="book-tag" style="background:${b.tagColor}22;color:${b.tagColor};border:1px solid ${b.tagColor}44">${b.tag}</span>
         <h4>${b.title}</h4>
